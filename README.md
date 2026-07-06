@@ -1,0 +1,2 @@
+# MDFF-NM-Molecular-Dynamics-Flexible-Fitting-Normal-Modes
+Conjunto de scripts que implementa um algoritmo híbrido de ajuste estrutural, combinando Dinâmica Molecular (MD) com Análise de Modos Normais (NMA). Esse pipeline foi desenvolvido para refinar estruturas de proteínas em mapas de densidade de cryo-EM, explorando múltiplas trajetórias de ajuste e aumentando a diversidade conformacional obtida.
