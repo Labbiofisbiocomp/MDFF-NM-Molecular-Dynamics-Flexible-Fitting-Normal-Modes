@@ -1,0 +1,141 @@
+###  MDFF_NM configuration file
+## adapted from MDFF files provided in
+## https://www.ks.uiuc.edu/Training/Tutorials/science/mdff/tutorial_mdff-html/
+ 
+set PSFFILE initial.psf
+set PDBFILE STRUC
+set GRIDPDB cycle_0.pdb
+set GBISON 0
+set DIEL 80
+set SCALING_1_4 1.0
+set ITEMP 300
+set FTEMP 300
+set GRIDFILE TARGMAP_grid.dx
+set GSCALE g_scale
+set EXTRAB {extrabonds.txt cispeptide.txt chirality.txt}
+set CONSPDB 0
+set FIXPDB  0
+set GRIDON 1
+set LANG LD_GAM
+ 
+set OUTPUTNAME  cycle_SORTIE
+ 
+set TS STEPS
+set MS 0
+ 
+set MARGIN 0
+ 
+####################################
+ 
+structure $PSFFILE
+coordinates $PDBFILE
+velocities cycle_VEL.vel
+ 
+paraTypeCharmm on
+parameters par_all36_prot.prm
+
+firsttimestep   0
+
+# Force-Field Parameters
+exclude             scaled1-4
+1-4scaling          $SCALING_1_4
+switching           on
+dielectric          $DIEL
+margin              $MARGIN 
+if {$GBISON} {
+  gbis on
+  alphacutoff         14.
+  switchdist          15.
+  cutoff              16.
+  pairlistdist        17.
+  ionconcentration    0.1
+  solventDielectric   80.0
+  sasa                on
+} else {
+  cutoff              10.
+  switchdist          9.
+  pairlistdist        11.
+}
+
+# Integrator Parameters
+timestep            1.0  ;# 1fs/step
+rigidBonds          water  ;# TIP3P
+nonbondedFreq       1
+fullElectFrequency  2  
+stepspercycle       10
+
+# Constant Temperature Control 
+#if {$ITEMP == $FTEMP} {
+langevin            on    ;# do langevin dynamics
+langevinDamping     $LANG     ;# damping coefficient (gamma) of 5/ps
+langevinTemp        $FTEMP
+langevinHydrogen    off    ;# don't couple langevin bath to hydrogens
+#} else {
+#  reassignFreq 1000
+#  if {$FTEMP > $ITEMP} {
+#    reassignIncr 10 
+#  } else {
+#    reassignIncr -10 
+#  }
+#  reassignTemp $ITEMP
+#  reassignHold $FTEMP
+#}
+    
+# Output
+outputName         $OUTPUTNAME
+restartfreq        1000     
+dcdfreq            500 
+outputEnergies      10
+outputPressure      10
+binaryoutput        no
+binaryrestart       no      ;#restart files are not in binary format
+
+
+# gridForces (to apply forces from 3D potential)
+if {$GRIDON} {
+  mgridForce               on
+  for {set i 0} {$i < [llength $GRIDFILE]} {incr i} {
+    mgridForceFile $i      [lindex $GRIDPDB $i]
+    mgridForceCol $i       O
+    mgridForceChargeCol $i B
+    mgridForcePotFile $i   [lindex $GRIDFILE $i]
+    mgridForceScale $i     [lindex $GSCALE $i] [lindex $GSCALE $i] [lindex $GSCALE $i] 
+  }
+}
+
+# Positional restraints
+if {$CONSPDB != 0} {
+  Constraints                    yes
+  ConsExp                        2
+  ConsRef                        $CONSPDB
+  ConsKFile                      $CONSPDB
+  ConskCol                       $CONSCOL
+}
+
+# Fixed atoms
+if {$FIXPDB != 0} {
+  fixedAtoms                yes
+  fixedAtomsFile            $FIXPDB
+  fixedAtomsCol             $FIXCOL
+}
+
+#############################################################
+## EXECUTION SCRIPT                                        ##
+#############################################################
+
+#if {$MS != 0} {
+#  minimize $MS
+#  reinitvels $ITEMP
+#}
+
+# extraBonds (for secondary structure restraints)
+if {$EXTRAB != 0} {
+  extraBonds yes
+  foreach fil $EXTRAB {
+    extraBondsFile $fil
+  }
+}
+#if {$ITEMP == $FTEMP} {
+run $TS
+
+
