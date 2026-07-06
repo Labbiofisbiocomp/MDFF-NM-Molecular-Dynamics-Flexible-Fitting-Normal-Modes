@@ -22,7 +22,7 @@ O workflow integra:
   
 ---
 ⚙️ Requisitos
-[Requirements]
+[Requirements](https://github.com/Labbiofisbiocomp/MDFF-NM-Molecular-Dynamics-Flexible-Fitting-Normal-Modes/blob/main/requirements.md)
 
 ---
 ## 🔄 Visão geral do pipeline
