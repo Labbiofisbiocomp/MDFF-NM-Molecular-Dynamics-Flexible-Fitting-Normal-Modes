@@ -113,4 +113,4 @@ Esse script:
 * Verifique os outputs antes de prosseguir para análises.
 
 ## 📌 Autoria
-Este pipeline pertence a: DOI: [10.1021/acs.jcim.3c02007](https://doi.org/10.1021/acs.jcim.3c02007?urlappend=%3Fref%3DPDF&jav=VoR&rel=cite-as)
+Este pipeline pertence a: DOI [10.1021/acs.jcim.3c02007](https://doi.org/10.1021/acs.jcim.3c02007?urlappend=%3Fref%3DPDF&jav=VoR&rel=cite-as)
