@@ -29,7 +29,7 @@ O pipeline MDFF-NM foi desenvolvido para:
 .
 ├── files/                        # Arquivo editável pelo usuário
 ├── inputs/                       # Arquivos de entrada  
-├── tutorials/
+├── tutoriais/
 ├── requirements.md
 ├── run-serial-mdff-nm-final.sh   # Script principal
 ├── rmsd_multireplica_MDFF_NM.sh  # Script para gerar o rmsd
