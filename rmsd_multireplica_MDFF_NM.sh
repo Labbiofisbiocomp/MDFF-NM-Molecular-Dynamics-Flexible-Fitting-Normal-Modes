@@ -40,6 +40,9 @@ echo "$PWD"
 # convert trajectories to trr
 catdcd -o temp.trr -otype trr -dcd cycle_1.dcd cycle_2.dcd cycle_3.dcd cycle_4.dcd cycle_5.dcd cycle_6.dcd cycle_7.dcd cycle_8.dcd cycle_9.dcd cycle_10.dcd cycle_11.dcd cycle_12.dcd cycle_13.dcd cycle_14.dcd cycle_15.dcd cycle_16.dcd cycle_17.dcd cycle_18.dcd cycle_19.dcd cycle_20.dcd
 
+# convert trajectories to dcd
+catdcd -o temp.dcd -otype dcd -dcd cycle_1.dcd cycle_2.dcd cycle_3.dcd cycle_4.dcd cycle_5.dcd cycle_6.dcd cycle_7.dcd cycle_8.dcd cycle_9.dcd cycle_10.dcd cycle_11.dcd cycle_12.dcd cycle_13.dcd cycle_14.dcd cycle_15.dcd cycle_16.dcd cycle_17.dcd cycle_18.dcd cycle_19.dcd cycle_20.dcd
+
 # copy concatenated structure file to outdir
 cp temp.trr ../${outdir}/${i}.trr
 cp temp.dcd ../${outdir}/${i}.dcd
@@ -67,7 +70,7 @@ EOF
 grep -v @ rmsd.xvg | grep -v '#' | awk '{print $2*10}' > ../${outdir}/temp
 
 # remove temporary files
-rm -f temp_fit.trr temp.dcd
+rm -f temp_fit.trr
 rm \#*
 
 # leave folder
