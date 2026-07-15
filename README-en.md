@@ -37,6 +37,7 @@ The MDFF-NM pipeline was developed to:
 ├── requirements.md
 ├── run-serial-mdff-nm-final.sh   # Main script
 ├── rmsd_multireplica_MDFF_NM.sh  # RMSD generation script
+├── README-en.md
 └── README.md
 ```
 
