@@ -45,3 +45,5 @@ END {
     }
 }
 ' rmsd_replicas_h12_semalinhamento_v2.dat > menores_rmsd_h12.dat
+
+### desenvolvido por Yolanda Marcello
