@@ -2,7 +2,7 @@
 
 Para rodar este projeto, você precisa ter instalado:
 - **R** (versão 4.6.0)
-- Pacote **bio3d** - R
+- **R** - Pacote **bio3d**
 - **VMD** (versão 1.9.4)
 - **NAMD2**
 
