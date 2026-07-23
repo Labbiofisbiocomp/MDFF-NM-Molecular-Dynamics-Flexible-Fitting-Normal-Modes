@@ -32,3 +32,5 @@ for {set i 1} {$i <= 100} {incr i} {
 }    
 
 quit
+
+### desenvolvido por Yolanda Marcello
